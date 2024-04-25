@@ -9,7 +9,7 @@ import platform
 from scripts.create_json import config_file
 from scripts.create_json import WriteConfigJson
 from scripts.create_json import check_db_connection
-
+#t
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
