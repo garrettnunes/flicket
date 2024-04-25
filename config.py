@@ -59,7 +59,8 @@ class BaseConfiguration(object):
         if db_type == 3:
             db_dialect = 'mysql'
 
-        SQLALCHEMY_DATABASE_URI = f'{db_dialect}+{db_driver}://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}'
+        # SQLALCHEMY_DATABASE_URI = f'{db_dialect}+{db_driver}://{db_username}:{db_password}@{db_url}:{db_port}/{db_name}'
+        SQLALCHEMY_DATABASE_URI = f'{db_dialect}+{db_driver}://{db_username}:{db_password}@{db_url}/{db_name}'
 
     if SQLALCHEMY_DATABASE_URI is None:
         raise ConnectionAbortedError('Incorrect database type defined in config.json.')
