@@ -8,7 +8,6 @@ from application import db
 from application.flicket.models.flicket_models import FlicketSubscription
 from application.flicket.scripts.flicket_functions import add_action
 
-
 def subscribe_user(ticket, user):
     if not ticket.is_subscribed(user):
         # subscribe user to ticket

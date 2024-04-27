@@ -106,6 +106,23 @@ class FlicketUser(PaginatedAPIMixin, UserMixin, Base):
         else:
             return False
 
+    # # @property
+    # def belongs_in_group(self,group_name):
+    #     """
+
+    #     Returns true if the user is a member of the 'super_user' group.
+
+    #     :return bool:
+    #     """
+    #     user = FlicketUser.query.filter_by(id=self.id).first()
+    #     for g in user.flicket_groups:
+    #         if g.group_name == app.config['SUPER_USER_GROUP_NAME'] \
+    #             or g.group_name == app.config['ADMIN_GROUP_NAME'] \
+    #             or g.group_name == group_name:
+    #             return True
+    #     else:
+    #         return False
+
     def check_password(self, password):
         """
 

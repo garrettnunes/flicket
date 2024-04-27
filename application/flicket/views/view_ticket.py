@@ -6,7 +6,7 @@
 import datetime
 
 from flask import render_template, redirect, url_for, g, request, flash
-from flask_login import login_required
+from flask_login import login_required, current_user
 from flask_babel import gettext
 
 from . import flicket_bp
@@ -32,8 +32,18 @@ from application.flicket.scripts.subscriptions import subscribe_user
 def ticket_view(ticket_id, page=1):
     # todo: make sure underscores aren't allowed in usernames as it breaks markdown?
 
+
+    # if not current_user.belongs_in_group('test'):
+    #     flash(gettext('You are not authorised.'), category='warning')
+    #     return redirect(url_for('flicket_bp.index'))
+
     # is ticket number legitimate
     ticket = FlicketTicket.query.filter_by(id=ticket_id).first()
+
+    # Only let users who belong in group to view
+    if not ticket.belongs_in_group(current_user.id):
+        flash(gettext('You are not authorized.'), category='warning')
+        return redirect(url_for('flicket_bp.index'))
 
     if not ticket:
         flash(gettext('Cannot find ticket: "%(value)s"', value=ticket_id), category='warning')

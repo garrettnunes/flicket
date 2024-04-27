@@ -31,7 +31,7 @@ def email_test():
         mail.test_email([form.email_address.data])
         flash(Markup(gettext(
             'Flicket has tried to send an email to the address you entered. Please check your inbox. If no email has '
-            'arrived please double check the <a href="{}{url_for("admin_bp.config")}">config</a>'
+            'arrived please double check the <a href="{}{{url_for("admin_bp.config")}}">config</a>'
             ' settings.'.format(app.config["base_url"]))),
             category='warning')
 

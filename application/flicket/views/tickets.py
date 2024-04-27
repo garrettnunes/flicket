@@ -27,7 +27,7 @@ def clean_csv_data(input_text):
     return output_text
 
 
-def tickets_view(page, is_my_view=False, subscribed=False):
+def tickets_view(page, is_my_view=False, subscribed=True):
     """
         Function common to 'tickets' and 'my_tickets' expect where query is filtered for users own tickets.
     """
