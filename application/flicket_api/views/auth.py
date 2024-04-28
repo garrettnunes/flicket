@@ -14,6 +14,17 @@ basic_auth = HTTPBasicAuth()
 token_auth = HTTPTokenAuth()
 
 
+# @basic_auth.is_super_user
+# def verify_super_user(username):
+#     user = FlicketUser.query.filter_by(username=username).first()
+#     if user is None:
+#         return False
+    
+#     if not g.user.is_admin and not g.user.is_super_user:
+#         return False
+#     # g.current_user = user
+#     return True
+
 @basic_auth.verify_password
 def verify_password(username, password):
     user = FlicketUser.query.filter_by(username=username).first()

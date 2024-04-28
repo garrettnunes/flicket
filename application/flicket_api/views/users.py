@@ -115,8 +115,8 @@
 
 """
 
-from flask import jsonify, request
-
+from flask import jsonify, request, redirect, url_for, flash, g
+from flask_babel import gettext
 from .sphinx_helper import api_url
 from . import bp_api
 from application import app
@@ -127,12 +127,18 @@ from application.flicket_api.views.auth import token_auth
 @bp_api.route(api_url + 'user/<int:id>', methods=['GET'])
 @token_auth.login_required
 def get_user(id):
+    if not g.user.is_admin and not g.user.is_super_user:
+        return FlicketUser.query.get_or_404(g.user.id).to_dict()
     return jsonify(FlicketUser.query.get_or_404(id).to_dict())
 
 
 @bp_api.route(api_url + 'users/', methods=['GET'])
 @token_auth.login_required
 def get_users():
+
+    if not g.user.is_admin and not g.user.is_super_user:
+        return None
+    
     name = request.args.get('name')
     users = FlicketUser.query
     if name:

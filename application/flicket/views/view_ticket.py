@@ -41,7 +41,9 @@ def ticket_view(ticket_id, page=1):
     ticket = FlicketTicket.query.filter_by(id=ticket_id).first()
 
     # Only let users who belong in group to view
-    if not ticket.belongs_in_group(current_user.id):
+    if not ticket.belongs_in_group(current_user.id) and \
+                        not current_user.is_admin and \
+                        not current_user.is_super_user:
         flash(gettext('You are not authorized.'), category='warning')
         return redirect(url_for('flicket_bp.index'))
 

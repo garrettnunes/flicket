@@ -211,7 +211,6 @@ class FlicketTicket(PaginatedAPIMixin, Base):
 
     def belongs_in_group(self,current_user_id):
         for x in self.subscribers:
-            print(x)
             if x.user_id == current_user_id:
                 return True
         return False

@@ -5,7 +5,7 @@
 
 import datetime
 
-from flask import redirect, url_for, flash, render_template
+from flask import redirect, url_for, flash, render_template, g
 from flask_babel import gettext
 from flask_login import login_required
 
@@ -24,6 +24,10 @@ from . import flicket_bp
 def ticket_assign(ticket_id=False):
     form = AssignUserForm()
     ticket = FlicketTicket.query.filter_by(id=ticket_id).one()
+
+    if not g.user.is_admin and not g.user.is_super_user:
+        flash(gettext('You are not authorized.'), category='warning')
+        return redirect(url_for('flicket_bp.ticket_view', ticket_id=ticket_id))
 
     if ticket.current_status.status == 'Closed':
         flash(gettext("Can't assign a closed ticket."), category='warning')

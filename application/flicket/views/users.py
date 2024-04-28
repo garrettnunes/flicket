@@ -3,9 +3,9 @@
 #
 # Flicket - copyright Paul Bourne: evereux@gmail.com
 
-from flask import render_template, redirect, request, url_for
+from flask import render_template, redirect, request, url_for, flash
 from flask_babel import gettext
-from flask_login import login_required
+from flask_login import login_required,current_user
 
 from application import app, flicket_bp
 from application.flicket.forms.flicket_forms import SearchUserForm
@@ -17,6 +17,9 @@ from application.flicket.models.flicket_user import FlicketUser
 @flicket_bp.route(app.config['FLICKET'] + 'users/<int:page>/', methods=['GET', 'POST'])
 @login_required
 def flicket_users(page=1):
+    if not current_user.is_admin and not current_user.is_super_user:
+        flash(gettext('You are not authorized.'), category='warning')
+        return redirect(url_for('flicket_bp.index'))
     form = SearchUserForm()
 
     __filter = request.args.get('filter')

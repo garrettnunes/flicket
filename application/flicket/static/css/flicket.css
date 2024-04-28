@@ -67,7 +67,7 @@ header {
     background: -o-linear-gradient(left, rgb(64, 91, 232) 0%, rgb(170, 216, 230) 61%, rgb(170, 216, 230) 100%);
     background: -ms-linear-gradient(left, rgb(64, 91, 232) 0%, rgb(170, 216, 230) 61%, rgb(170, 216, 230) 100%);
     background: linear-gradient(to right, rgb(64, 91, 232) 0%, rgb(170, 216, 230) 61%, rgb(170, 216, 230) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f15627', endColorstr='#edbbad', GradientType=1);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#405be8', endColorstr='#edbbad', GradientType=1);
     color: white;
     padding: 10pt;
 }

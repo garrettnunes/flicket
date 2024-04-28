@@ -6,53 +6,54 @@
 
     <div class="container">
 
-        <div class="row m-2 p-2 border rounded bg-white">
-            <div class="col">
-                <div class="row">
-                    <div class="col text-center">
-                        <h1 class=>{{ _('Open High Priority Tickets') }}</h1>
-                    </div>
-
-
-                </div>
-                <div class="row">
-                    <div class="col">
-                        {% if tickets.count() > 0 %}
-                            <div id="carouselExampleControls" class="carousel slide mt-3" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    {% for t in tickets %}
-                                        <div class="bg-white carousel-item {% if loop.first %} active {% endif %}">
-                                            {% include('flicket_items.html') %}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row m-2 p-2 border rounded bg-white">
-            <div class="col">
-                <div class="row">
-                    <div class="col">
-                        <h1 class="text-center">{{ _('Statistics') }}</h1>
-                    </div>
-                </div>
-                <div class="row">
-
-                    {% for id in ids %}
-                        <div class="col-md-4 col-sm-6">
-                            <div id="{{ id }}"></div>
+        {% if g.user.is_admin or g.user.is_super_user %}
+            <div class="row m-2 p-2 border rounded bg-white">
+                <div class="col">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h1 class=>{{ _('Open High Priority Tickets') }}</h1>
                         </div>
-                    {% endfor %}
 
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {% if tickets.count() > 0 %}
+                                <div id="carouselExampleControls" class="carousel slide mt-3" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        {% for t in tickets %}
+                                            <div class="bg-white carousel-item {% if loop.first %} active {% endif %}">
+                                                {% include('flicket_items.html') %}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
 
-        </div>
+            <div class="row m-2 p-2 border rounded bg-white">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <h1 class="text-center">{{ _('Statistics') }}</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        {% for id in ids %}
+                            <div class="col-md-4 col-sm-6">
+                                <div id="{{ id }}"></div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            </div>
+        {% endif %}
 
     </div>
 

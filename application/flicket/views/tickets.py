@@ -31,6 +31,8 @@ def tickets_view(page, is_my_view=False, subscribed=True):
     """
         Function common to 'tickets' and 'my_tickets' expect where query is filtered for users own tickets.
     """
+    if g.user.is_admin or g.user.is_super_user:
+        subscribed = False
 
     form = SearchTicketForm()
 

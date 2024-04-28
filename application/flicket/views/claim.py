@@ -21,6 +21,9 @@ from application.flicket.scripts.email import FlicketMail
 @login_required
 def ticket_claim(ticket_id=False):
     if ticket_id:
+        if not g.user.is_admin and not g.user.is_super_user:
+            flash(gettext('You are not authorized.'), category='warning')
+            return redirect(url_for('flicket_bp.ticket_view', ticket_id=ticket_id))
         # claim ticket
         ticket = FlicketTicket.query.filter_by(id=ticket_id).first()
 

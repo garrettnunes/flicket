@@ -22,6 +22,9 @@ from application.flicket.scripts.flicket_functions import add_action
 def release(ticket_id=False):
 
     if ticket_id:
+        if not g.user.is_admin and not g.user.is_super_user:
+            flash(gettext('You are not authorized.'), category='warning')
+            return redirect(url_for('flicket_bp.ticket_view', ticket_id=ticket_id))
 
         ticket = FlicketTicket.query.filter_by(id=ticket_id).first()
 

@@ -5,7 +5,7 @@
 
 from flask import flash, redirect, url_for, render_template
 from flask_babel import gettext
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from . import flicket_bp
 from application import app, db
@@ -18,6 +18,10 @@ from application.flicket.models.flicket_models import FlicketDepartment
 @flicket_bp.route(app.config['FLICKET'] + 'departments/<int:page>/', methods=['GET', 'POST'])
 @login_required
 def departments(page=1):
+    if not current_user.is_admin and not current_user.is_super_user:
+        flash(gettext('You are not authorized.'), category='warning')
+        return redirect(url_for('flicket_bp.index'))
+    
     form = DepartmentForm()
 
     query = FlicketDepartment.query.order_by(FlicketDepartment.department.asc())
